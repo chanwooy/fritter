@@ -2,6 +2,7 @@ import type {HydratedDocument, Types} from 'mongoose';
 import type {Freet} from './model';
 import FreetModel from './model';
 import UserCollection from '../user/collection';
+import ControversyCollection from '../controversy/collection'
 
 /**
  * This files contains a class that has the functionality to explore freets
@@ -84,6 +85,7 @@ class FreetCollection {
    * @return {Promise<Boolean>} - true if the freet has been deleted, false otherwise
    */
   static async deleteOne(freetId: Types.ObjectId | string): Promise<boolean> {
+    await ControversyCollection.deleteOne(freetId); // dissociate the controversy concept first
     const freet = await FreetModel.deleteOne({_id: freetId});
     return freet !== null;
   }
@@ -94,6 +96,7 @@ class FreetCollection {
    * @param {string} authorId - The id of author of freets
    */
   static async deleteMany(authorId: Types.ObjectId | string): Promise<void> {
+    await ControversyCollection.deleteMany(authorId); // dissociate the controversy concept first
     await FreetModel.deleteMany({authorId});
   }
 }
