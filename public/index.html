@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script src="/scripts/freet.js"></script>
   <script src="/scripts/user.js"></script>
+  <script src="/scripts/controversy.js"></script>
+  <script src="/scripts/profile.js"></script>
+  <script src="/scripts/reflection.js"></script>
   <script src="/scripts/index.js"></script>
 </head>
 
@@ -117,6 +120,157 @@
           </div>
           <input type="submit" value="Delete Freet">
         </form>
+
+        <form id="like-freet">
+          <h3>Like Freet</h3>
+          <div>
+            <label for="id">ID:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="Like Freet">
+        </form>
+
+        <form id="dislike-freet">
+          <h3>Dislike Freet</h3>
+          <div>
+            <label for="id">ID:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="Dislike Freet">
+        </form>
+
+        <form id="view-all-reflections">
+          <h3>View All Reflections</h3>
+          <input type="submit" value="View All Reflections">
+        </form>
+
+      <form id="view-reflections-by-author">
+        <h3>View Reflections By Author</h3>
+        <div>
+          <label for="author">Author:</label>
+          <input id="author" name="author">
+        </div>
+        <input type="submit" value="View Reflections By Author">
+      </form>
+
+      <form id="create-reflection">
+        <h3>Create Reflection</h3>
+        <div>
+          <label for="content">Content:</label>
+          <textarea id="content" name="content"></textarea>
+        </div>
+        <input type="submit" value="Create Reflection">
+      </form>
+
+      <form id="edit-reflection">
+        <h3>Edit Reflection</h3>
+        <div>
+          <label for="id">ID:</label>
+          <input id="id" name="id">
+        </div>
+        <div>
+          <label for="content">Content:</label>
+          <textarea id="content" name="content"></textarea>
+        </div>
+        <input type="submit" value="Edit Reflection">
+      </form>
+
+      <form id="delete-reflection">
+        <h3>Delete Reflection</h3>
+        <div>
+          <label for="id">ID:</label>
+          <input id="id" name="id">
+        </div>
+        <input type="submit" value="Delete Reflection">
+      </form>
+
+      
+
+
+      <form id="view-all-profiles">
+        <h3>View All Profiles</h3>
+        <input type="submit" value="View All Profiles">
+      </form>
+
+      <form id="view-user-profiles">
+        <h3>View User Profiles</h3>
+        <div>
+          <label for="username">Username:</label>
+          <input id="username" name="username">
+        </div>
+        <input type="submit" value="View User Profiles">
+      </form>
+
+      <form id="create-profile">
+        <h3>Create Profile</h3>
+        <div>
+          <label for="username">Username:</label>
+          <input id="username" name="username">
+        </div>
+        <div>
+          <label for="profileName">Profile Name:</label>
+          <input id="profileName" name="profileName">
+        </div>
+        <input type="submit" value="Create Profile">
+      </form>
+
+      <form id="delete-profile">
+        <h3>Delete Profile</h3>
+        <div>
+          <label for="username">Username:</label>
+          <input id="username" name="username">
+        </div>
+        <div>
+          <label for="profileName">Profile Name:</label>
+          <input id="profileName" name="profileName">
+        </div>
+        <input type="submit" value="Delete Profile">
+      </form>
+
+      <form id="follow-profile">
+        <h3>Follow Profile</h3>
+        <div>
+          <label for="username">Username:</label>
+          <input id="username" name="username">
+        </div>
+        <div>
+          <label for="profileName">Profile Name:</label>
+          <input id="profileName" name="profileName">
+        </div>
+        <div>
+          <label for="otherUsername">Other Username:</label>
+          <input id="otherUsername" name="otherUsername">
+        </div>
+        <div>
+          <label for="otherProfileName">Other Profile Name:</label>
+          <input id="otherProfileName" name="otherProfileName">
+        </div>
+        <input type="submit" value="Follow Profile">
+      </form>
+
+      <form id="unfollow-profile">
+        <h3>Unfollow Profile</h3>
+        <div>
+          <label for="username">Username:</label>
+          <input id="username" name="username">
+        </div>
+        <div>
+          <label for="profileName">Profile Name:</label>
+          <input id="profileName" name="profileName">
+        </div>
+        <div>
+          <label for="otherUsername">Other Username:</label>
+          <input id="otherUsername" name="otherUsername">
+        </div>
+        <div>
+          <label for="otherProfileName">Other Profile Name:</label>
+          <input id="otherProfileName" name="otherProfileName">
+        </div>
+        <input type="submit" value="Unfollow Profile">
+      </form>
+
+      
+        
       </div>
     </section>
     <section>

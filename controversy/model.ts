@@ -39,17 +39,14 @@ const ControversySchema = new Schema<Controversy>({
     required: true,
     ref: 'Freet'
   },
-  // The date the freet was created
   likes: {
     type: Number,
     required: true
   },
-  // The content of the freet
   dislikes: {
     type: Number,
     required: true
   },
-  // The date the freet was modified
   isControversial: {
     type: Boolean,
     required: true

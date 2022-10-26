@@ -12,6 +12,8 @@ import * as userValidator from '../user/middleware';
 import {userRouter} from '../user/router';
 import {freetRouter} from '../freet/router';
 import {controversyRouter} from '../controversy/router';
+import {reflectionRouter} from '../reflection/router';
+import {profileRouter} from '../profile/router';
 
 // Load environmental variables
 dotenv.config({});
@@ -78,6 +80,8 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/users', userRouter);
 app.use('/api/freets', freetRouter);
 app.use('/api/controversies', controversyRouter);
+app.use('/api/reflections', reflectionRouter);
+app.use('/api/profiles', profileRouter);
 
 // Catch all the other routes and display error message
 app.all('*', (req: Request, res: Response) => {

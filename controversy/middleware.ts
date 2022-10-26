@@ -1,1 +1,1 @@
-// no middleware needed at the moment; like and dislike depend on user validation and freet validation
+// no middleware needed as controversy just needs middlewares from user/freet concepts

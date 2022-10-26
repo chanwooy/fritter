@@ -85,6 +85,7 @@ router.post(
     userValidator.isValidPassword
   ],
   async (req: Request, res: Response) => {
+    console.log("got here");
     const user = await UserCollection.addOne(req.body.username, req.body.password);
     req.session.userId = user._id.toString();
     res.status(201).json({
@@ -139,8 +140,8 @@ router.delete(
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    await UserCollection.deleteOne(userId);
     await FreetCollection.deleteMany(userId);
+    await UserCollection.deleteOne(userId);
     req.session.userId = undefined;
     res.status(200).json({
       message: 'Your account has been deleted successfully.'

@@ -79,14 +79,14 @@ class ControversyCollection {
    */
   static async likeOne(freetId: Types.ObjectId | string, userId: string): Promise<HydratedDocument<Controversy>> {
     const controversy = await ControversyModel.findOne({freetId: freetId});
-    if (userId in controversy.liked) { // if the user already liked the post, then cancel it
+    if (controversy.liked.includes(userId)) { // if the user already liked the post, then cancel it
       const i: number = controversy.liked.indexOf(userId);
-      controversy.liked = controversy.liked.splice(i, 1);
+      controversy.liked.splice(i, 1);
       controversy.likes--;
     } else { // then increment the like
-      if (userId in controversy.disliked) { // however, before everything, if the user disliked the post before, cancel that dislike
+      if (controversy.disliked.includes(userId)) { // however, before everything, if the user disliked the post before, cancel that dislike
         const i: number = controversy.disliked.indexOf(userId);
-        controversy.disliked = controversy.disliked.splice(i, 1);
+        controversy.disliked.splice(i, 1);
         controversy.dislikes--;
       } // and like the post
       controversy.likes++;
@@ -108,14 +108,14 @@ class ControversyCollection {
    */
    static async dislikeOne(freetId: Types.ObjectId | string, userId: string): Promise<HydratedDocument<Controversy>> {
     const controversy = await ControversyModel.findOne({freetId: freetId});
-    if (userId in controversy.disliked) { // if the user already disliked the post, then cancel it
+    if (controversy.disliked.includes(userId)) { // if the user already disliked the post, then cancel it
       const i: number = controversy.disliked.indexOf(userId);
-      controversy.disliked = controversy.disliked.splice(i, 1);
+      controversy.disliked.splice(i, 1);
       controversy.dislikes--;
     } else { // then increment the dislike
-      if (userId in controversy.liked) { // however, before everything, if the user liked the post before, cancel that like
+      if (controversy.liked.includes(userId)) { // however, before everything, if the user liked the post before, cancel that like
         const i: number = controversy.liked.indexOf(userId);
-        controversy.liked = controversy.liked.splice(i, 1);
+        controversy.liked.splice(i, 1);
         controversy.likes--;
       } // and like the post
       controversy.dislikes++;
@@ -140,13 +140,27 @@ class ControversyCollection {
   }
 
   /**
-   * Delete all the controversies by the given author (regardless of whether isControversial == true)
+   * Delete all the controversies by the given user (regardless of whether isControversial == true)
    *
    * @param {string} authorId - The id of author of freets
    */
   static async deleteMany(authorId: Types.ObjectId | string): Promise<void> {
     const user = await UserCollection.findOneByUserId(authorId);
     const freets = await FreetCollection.findAllByUsername(user.username);
+    const controversies = freets.map(async(freet) => {
+      return await ControversyModel.deleteOne({freetId: freet._id});
+    });
+    await Promise.all(controversies);
+  }
+
+  /**
+   * Delete all the controversies by the given profile (regardless of whether isControversial == true)
+   *
+   * @param {string} profileName - The name of profile whose freets are going to deleted
+   */
+   static async deleteManyForProfile(authorId: Types.ObjectId | string, profileName: string): Promise<void> {
+    const user = await UserCollection.findOneByUserId(authorId);
+    const freets = await FreetCollection.findAllByProfileName(user.username, profileName)
     const controversies = freets.map(async(freet) => {
       return await ControversyModel.deleteOne({freetId: freet._id});
     });

@@ -340,7 +340,12 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if the user is not given
 - `404` if the user does not have the profile of the specified name
 
-#### `POST /api/profiles?name=PROFILENAME` - Create a new profile whose name is the given name
+#### `POST /api/profiles` - Create a new profile whose name is the given name (params in req.body)
+
+**Body**
+
+- `username` _{string}_ - The user's username
+- `profileName` _{string}_ - The profile's name
 
 **Returns**
 
@@ -351,7 +356,12 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `403` if the user is not logged in
 
-#### `DELETE /api/profiles?name=PROFILENAME` - Delete an existing profile
+#### `DELETE /api/profiles` - Delete an existing profile (params in req.body)
+
+**Body**
+
+- `username` _{string}_ - The user's username
+- `profileName` _{string}_ - The profile's name
 
 **Returns**
 
@@ -362,17 +372,41 @@ This renders the `index.html` file that will be used to interact with the backen
 - `403` if the user is not logged in
 - `404` if the profile name is invalid/not found
 
-#### `PUT /api/profiles?name=PROFILENAME&newName=NEWPROFILENAME` - Update the name of the existing profile
+#### `PUT /api/profiles/follow` - Follow another profile (params in req.body)
+
+**Body**
+
+- `username` _{string}_ - The user's username
+- `profileName` _{string}_ - The profile's name
+- `otherUsername` _{string}_ - The other user's username
+- `otherProfileName` _{string}_ - The other profile's name
 
 **Returns**
 
 - A success message
-- An object with the updated profile
 
 **Throws**
 
 - `403` if the user is not logged in
-- '404' if the profile with the first given name does not exist
+- `404` if the profile name is invalid/not found
+
+#### `PUT /api/profiles/unfollow` - Unfollow another profile (params in req.body)
+
+**Body**
+
+- `username` _{string}_ - The user's username
+- `profileName` _{string}_ - The profile's name
+- `otherUsername` _{string}_ - The other user's username
+- `otherProfileName` _{string}_ - The other profile's name
+
+**Returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the profile name is invalid/not found
 
 
 
@@ -386,18 +420,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - An array of all reflections sorted in reverse chronological order
 
-#### `GET /api/reflections/n` - Get nth reflection by author (where 1st reflection is the oldest reflection)
-
-**Returns**
-
-- A reflection created by the user
-
-**Throws**
-
-- `403` if the user is not logged in
-- `404` if nth reflection of the user does not exist
-
-#### `POST /api/reflections/title` - Create a new freet with the given title
+#### `POST /api/reflections` - Create a new reflection
 
 **Body**
 
@@ -414,7 +437,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - `400` if the reflection content is empty or a stream of empty spaces
 - '400' if title is invalid/not provided
 
-#### `DELETE /api/reflections/:title?` - Delete an existing reflection
+#### `DELETE /api/reflections/:reflectionId?` - Delete an existing reflection
 
 **Returns**
 
@@ -429,6 +452,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Body**
 
+- `reflectionId` _{string}_ - The id of the reflection
 - `content` _{string}_ - The new content of the reflection
 
 **Returns**
@@ -470,5 +494,3 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `403` if the user is not logged in
 - `404` if the freetId is not valid
-
-**Other operations on controversies are undefined; controversies are complementary to freets; users should not have access to controversies by themselves but rather should only cast a vote (like or dislike or neither)**
